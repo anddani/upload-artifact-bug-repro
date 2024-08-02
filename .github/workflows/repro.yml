@@ -1,0 +1,26 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  upload-artifact:
+    name: Uploading file through symbolic link
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write file
+        run: |
+          echo "My file" > file.txt
+          ln -s file.txt symbolic-link.txt
+
+      - name: Upload file 4.3.4
+        uses: actions/upload-artifact@v4.3.4
+        with:
+          name: file-4-3-4.txt
+          path: ./symbolic-link.txt
+
+      - name: Upload file 4.3.5
+        uses: actions/upload-artifact@v4.3.5
+        with:
+          name: file-4-3-5.txt
+          path: ./symbolic-link.txt
